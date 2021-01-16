@@ -1,32 +1,42 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <top-bar v-if="isShow"></top-bar>
+    <div class="main">
+      <side-bar v-if="isShow"> </side-bar>
+      <router-view> </router-view>
     </div>
-    <router-view/>
   </div>
 </template>
-
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import TopBar from "components/common/TopBar";
+import SideBar from "components/common/SideBar";
+export default {
+  components: {
+    TopBar,
+    SideBar,
+  },
+  computed: {
+    isShow() {
+      if (this.$route.path == "/" || this.$route.path == "/login") {
+        return false;
+      } else return true;
+    },
+  },
+  created() {
+    if (sessionStorage.getItem("user")) {
+      this.$store.state.user = sessionStorage.getItem("user");
+      this.$store.state.count = sessionStorage.getItem("count");
     }
-  }
+  },
+};
+</script>
+<style lang="less">
+@import url("assets/css/commom.css");
+.main {
+  width: 80vw;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
 }
 </style>
