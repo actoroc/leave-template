@@ -28,7 +28,6 @@ export default {
     if (sessionStorage.getItem("user")) {
       this.$store.state.user = sessionStorage.getItem("user");
       this.$store.state.count = sessionStorage.getItem("count");
-      console.log(111);
     }
   },
 };
