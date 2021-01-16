@@ -3,7 +3,9 @@
     <top-bar v-if="isShow"></top-bar>
     <div class="main">
       <side-bar v-if="isShow"> </side-bar>
-      <router-view> </router-view>
+      <keep-alive>
+        <router-view> </router-view>
+      </keep-alive>
     </div>
   </div>
 </template>
@@ -26,6 +28,7 @@ export default {
     if (sessionStorage.getItem("user")) {
       this.$store.state.user = sessionStorage.getItem("user");
       this.$store.state.count = sessionStorage.getItem("count");
+      console.log(111);
     }
   },
 };

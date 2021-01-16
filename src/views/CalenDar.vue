@@ -1,6 +1,6 @@
 <template>
   <div class="calendar">
-    <el-calendar first-day-of-week="7">
+    <el-calendar :first-day-of-week='7'>
       <template slot="dateCell" slot-scope="{ date, data }">
         <p :class="{ dots: holiday.hasOwnProperty(data.day) }">
           <span>{{ data.day.split("-").slice(1).join("-") }}</span
@@ -34,8 +34,6 @@ export default {
       },
     };
   },
-  
-
 };
 </script>
 
@@ -52,13 +50,13 @@ export default {
     color: #c0c4cc;
   }
 }
-.calendar{
-.el-calendar-table tr td:first-child,
-td:last-child {
-  color: #ef4f4f;
-  p:first-child::after {
-    content: "休";
+.calendar {
+  .el-calendar-table tr td:first-child,
+  td:last-child {
+    color: #ef4f4f;
+    p:first-child::after {
+      content: "休";
+    }
   }
-}
 }
 </style>

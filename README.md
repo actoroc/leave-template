@@ -1,5 +1,5 @@
 # leave-template
-
+vue和elementui
 ## Project setup
 ```
 npm install
