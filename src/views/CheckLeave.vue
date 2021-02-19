@@ -56,7 +56,9 @@ tbody {
 <script>
 import axios from "axios";
 export default {
-  
+  created() {
+     axios.post("/api/getLeave.php").then(res=>this.tableData = res.data);
+  },
 
   methods: {
     tableRowClassName({ row, rowIndex }) {

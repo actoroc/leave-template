@@ -27,8 +27,9 @@
           </template>
         </el-table-column>
       </el-table>
-      <div class="total"><span>请假总天数:</span><span>{{item}}</span></div>
-      
+      <div class="total">
+        <span>请假总天数:</span><span>{{ item }}</span>
+      </div>
     </template>
   </div>
 </template>
@@ -40,7 +41,7 @@
   flex: 1;
   margin-top: 20px;
 }
-.total{
+.total {
   margin-right: 200px;
   float: right;
   font-size: 20px;
@@ -64,7 +65,13 @@ tbody {
 <script>
 import axios from "axios";
 export default {
-  
+  created() {
+    axios
+      .post("/api/allLeave.php", { username: this.$store.state.user })
+      .then((res) => {
+        this.tableData = res.data;
+      });
+  },
   methods: {
     tableRowClassName({ row, rowIndex }) {
       if (rowIndex === 1) {
@@ -75,12 +82,12 @@ export default {
       return "";
     },
     handleDelete(index, row) {
-         let obj = {
-          ltime : row.ltime,
+      let obj = {
+        ltime: row.ltime,
       };
-      axios.post("/api/delLeave.php",obj);
+      axios.post("/api/delLeave.php", obj);
       setInterval(() => {
-          this.$router.go(0);
+        this.$router.go(0);
       }, 500);
     },
   },
@@ -90,9 +97,9 @@ export default {
     };
   },
   computed: {
-    item(){
-     return this.tableData.reduce((tolal,cur)=>(tolal+=cur.day*1),0)
-    }
-  }
+    item() {
+      return this.tableData.reduce((tolal, cur) => (tolal += cur.day * 1), 0);
+    },
+  },
 };
 </script>
